@@ -1,221 +1,171 @@
-/* Use border box so padding/borders don't mess up element sizing */
+/* Basic page setup so elements size normally */
 html {
   box-sizing: border-box;
 }
 
-/* Make all elements inherit the box sizing rule */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
 
-/* ---------- Base page styles ---------- */
-
+/* General text and background styling */
 body {
-  font-family: Arial, Geneva, sans-serif;   /* Simple font */
+  font-family: Arial, Geneva, sans-serif;
   margin: 0;
-  padding: 0 0 2rem 0;                      /* Extra space at bottom */
-  background-color: #f4f4f4;                /* Light gray background */
-  color: #333;                              /* Dark gray text */
+  padding: 1rem 0 3rem;
+  background: #f4f4f4;
 }
 
 h1, h2 {
-  text-align: center;                       /* Center all section titles */
+  text-align: center;
 }
 
-h1 {
-  margin: 1.5rem 0 0.5rem;
-}
-
-h2 {
-  margin: 1.5rem 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-/* ---------- Flexbox grid ---------- */
-
-/* Main flex row container for each row of cards */
-.row {
-  display: flex;
-  flex-wrap: wrap;                          /* Allows items to wrap when needed */
-  justify-content: flex-start;
-  width: 90%;
-  max-width: 1100px;                        /* Keep layout centered and clean */
-  margin: 0 auto 1.5rem;
-}
-
-/* Base card/column styling (mobile first approach) */
-[class*="col-"],
-.col-flex {
-  background: #ffffff;
-  border-radius: 4px;
-  padding: 0.75rem;
-  margin-left: 4%;                          /* Space between columns */
-  margin-bottom: 1rem;
-  flex: 0 0 92%;                             /* Mobile: one card per row */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);    /* Little bit of shadow */
-}
-
-/* Make the first card in each row align flush left */
-.row > *:first-child {
-  margin-left: 0;
-}
-
-/* Titles inside cards */
-article h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-}
-
-/* All images inside cards */
-article img {
-  width: 100%;                              /* Always fill the width of the card */
-  height: 170px;                            /* Force even height for consistency */
-  object-fit: cover;                        /* Crop slightly but still keeps the layout clean */
+/* All images stretch to the width of the card */
+img {
+  width: 100%;
   display: block;
-  margin: 0.5rem 0;
   border-radius: 6px;
 }
 
-/* Paragraph styling inside cards */
-article p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 0.25rem 0;
+/* Each row on the page becomes a grid container now */
+/* The gap property gives space between the items inside the grid */
+.row {
+  width: 90%;
+  max-width: 1150px;
+  margin: 1.5rem auto;
+  display: grid;
+  gap: 1rem;
 }
 
-/* "Read more" link styling */
-article a {
-  text-decoration: none;
+/* Shared visual styling for all the cards */
+[class*="col-"], .col-flex {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* ROW 1 */
+/* Starts with one column for small screens */
+.row-1 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .row-1 {
+    /* Using auto fit and minmax makes this row resize itself nicely */
+    /* The grid creates as many cards in a row as the screen can fit */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .row-1 {
+    /* Larger screens show exactly four equal cards */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ROW 2 */
+/* Starts stacked on mobile screens */
+.row-2 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .row-2 {
+    /* Two wide cards appear side by side once the screen is wide enough */
+    grid-template-columns: repeat(2, 1fr);
+
+    /* This keeps both cards at a similar height even if text lengths vary */
+    grid-auto-rows: minmax(260px, auto);
+  }
+}
+
+/* ROW 3 */
+/* Sidebar and feature card stack on small screens */
+.row-3 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .row-3 {
+    /* Four equal columns form the base grid for this row */
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Sidebar takes one column in the four column grid */
+  .row-3 .sidebar {
+    grid-column: span 1;
+  }
+
+  /* Feature card takes three columns for a wider layout */
+  .row-3 .feature {
+    grid-column: span 3;
+  }
+}
+
+/* ROW 4 */
+/* Single card layout */
+.row-4 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .row-4 .col-4 {
+    /* This makes the card stretch across the entire grid width */
+    grid-column: 1 / -1;
+  }
+}
+
+/* ROW 5 */
+/* Starts with one column and then changes layout on large screens */
+.row-5 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .row-5 {
+    /* Four column base layout for the one two one pattern */
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Small side card takes one grid column */
+  .row-5 .side-card {
+    grid-column: span 1;
+  }
+
+  /* Center card takes two grid columns */
+  .row-5 .main-card {
+    grid-column: span 2;
+  }
+}
+
+/* ROW 6 */
+/* Three equal cards when there is enough space on the screen */
+.row-6 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .row-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra styling for the spec cards in row six */
+.spec-card {
+  text-align: center;
+}
+
+.spec-image {
+  max-width: 200px;
+  margin: 0 auto 1rem;
+}
+
+.spec-value {
+  font-size: 1.4rem;
   font-weight: bold;
 }
 
-/* ---------- Column background colors, helps visualize the layout ---------- */
-
-.col-1 {
-  background-color: #A3CDD9;
-}
-
-.col-2 {
-  background-color: #FFFCE6;
-}
-
-.col-3 {
-  background-color: #D9F1A3;
-}
-
-.col-4 {
-  background-color: #F1D9A3;
-}
-
-.col-flex {
-  background-color: #E6E6FF;
-}
-
-/* ---------- Row specific customization ---------- */
-
-/* Row 6 layout: spec cards use flex grow and wrap cleanly */
-.row-6 {
-  align-items: stretch;
-  gap: 1rem;                                  /* Space between spec cards */
-}
-
-/* Row 6: mobile behavior (each spec card full width) */
-.row-6 .col-flex {
-  flex: 1 1 92%;
-}
-
-/* Styling for individual spec cards in Row 6 */
-.spec-card {
-  background-color: #eef0ff;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  flex: 1 1 220px;                            /* Allows flexible resizing */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Spec card image size */
-.spec-image {
-  width: 100%;
-  max-width: 180px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  display: block;
-}
-
-/* Large number for spec value (0-60, HP, etc.) */
-.spec-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 4px 0 8px;
-}
-
-/* Extra description text for specs */
 .spec-note {
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-/* Row 5: reorder items on mobile so the main card shows first */
-.row-5 .main-card {
-  order: 2;
-}
-
-.row-5 .side-card:first-of-type {
-  order: 1;
-}
-
-.row-5 .side-card:last-of-type {
-  order: 3;
-}
-
-/* ---------- Tablet styles (480px and up) ---------- */
-@media only screen and (min-width: 480px) {
-
-  /* 1-column and 2-column items get two per row on tablet */
-  .col-1,
-  .col-2 {
-    flex: 0 0 44%;
-  }
-
-  /* Keep wider items full width on tablet */
-  .col-3,
-  .col-4 {
-    flex: 0 0 92%;
-  }
-
-  /* Row 6: show more spec cards per row */
-  .row-6 .col-flex {
-    flex: 1 1 28%;
-  }
-}
-
-/* ---------- Desktop styles (768px and up) ---------- */
-@media only screen and (min-width: 768px) {
-
-  /* Flex basis values chosen to match assignment layout requirements */
-  .col-1 {
-    flex: 0 0 20%;
-  }
-
-  .col-2 {
-    flex: 0 0 44%;
-  }
-
-  .col-3 {
-    flex: 0 0 68%;
-  }
-
-  .col-4 {
-    flex: 0 0 92%;
-  }
-
-  /* Row 6: three spec cards displayed evenly across the row */
-  .row-6 .col-flex {
-    flex: 1 1 20%;
-  }
+  opacity: 0.85;
 }
