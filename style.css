@@ -43,7 +43,7 @@ img {
   border-radius: 8px;
 }
 
-/* ROW 1 */
+/* Row 1 */
 /* Starts with one column for small screens */
 .row-1 {
   grid-template-columns: 1fr;
@@ -64,7 +64,7 @@ img {
   }
 }
 
-/* ROW 2 */
+/* Row 2 */
 /* Starts stacked on mobile screens */
 .row-2 {
   grid-template-columns: 1fr;
@@ -80,7 +80,7 @@ img {
   }
 }
 
-/* ROW 3 */
+/* Row 3 */
 /* Sidebar and feature card stack on small screens */
 .row-3 {
   grid-template-columns: 1fr;
@@ -103,7 +103,7 @@ img {
   }
 }
 
-/* ROW 4 */
+/* Row 4 */
 /* Single card layout */
 .row-4 {
   grid-template-columns: 1fr;
@@ -116,7 +116,7 @@ img {
   }
 }
 
-/* ROW 5 */
+/* Row 5 */
 /* Starts with one column and then changes layout on large screens */
 .row-5 {
   grid-template-columns: 1fr;
@@ -139,7 +139,7 @@ img {
   }
 }
 
-/* ROW 6 */
+/* Row 6 */
 /* Three equal cards when there is enough space on the screen */
 .row-6 {
   grid-template-columns: 1fr;
