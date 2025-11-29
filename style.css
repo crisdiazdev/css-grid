@@ -26,8 +26,7 @@ img {
   border-radius: 6px;
 }
 
-/* Each row on the page becomes a grid container now */
-/* The gap property gives space between the items inside the grid */
+/* Each row on the page becomes a grid container  */
 .row {
   width: 90%;
   max-width: 1150px;
@@ -44,15 +43,12 @@ img {
 }
 
 /* Row 1 */
-/* Starts with one column for small screens */
 .row-1 {
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 480px) {
   .row-1 {
-    /* Using auto fit and minmax makes this row resize itself nicely */
-    /* The grid creates as many cards in a row as the screen can fit */
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
@@ -65,46 +61,41 @@ img {
 }
 
 /* Row 2 */
-/* Starts stacked on mobile screens */
 .row-2 {
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 600px) {
   .row-2 {
-    /* Two wide cards appear side by side once the screen is wide enough */
+   
     grid-template-columns: repeat(2, 1fr);
-
-    /* This keeps both cards at a similar height even if text lengths vary */
     grid-auto-rows: minmax(260px, auto);
   }
 }
 
 /* Row 3 */
-/* Sidebar and feature card stack on small screens */
 .row-3 {
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 768px) {
   .row-3 {
-    /* Four equal columns form the base grid for this row */
+    /* Four columns form the base grid for this row */
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Sidebar takes one column in the four column grid */
+  /* Sidebar one column in the four column grid */
   .row-3 .sidebar {
     grid-column: span 1;
   }
 
-  /* Feature card takes three columns for a wider layout */
+  /* Feature card three columns for a wider layout */
   .row-3 .feature {
     grid-column: span 3;
   }
 }
 
 /* Row 4 */
-/* Single card layout */
 .row-4 {
   grid-template-columns: 1fr;
 }
@@ -117,7 +108,6 @@ img {
 }
 
 /* Row 5 */
-/* Starts with one column and then changes layout on large screens */
 .row-5 {
   grid-template-columns: 1fr;
 }
@@ -140,7 +130,6 @@ img {
 }
 
 /* Row 6 */
-/* Three equal cards when there is enough space on the screen */
 .row-6 {
   grid-template-columns: 1fr;
 }
@@ -151,7 +140,7 @@ img {
   }
 }
 
-/* Extra styling for the spec cards in row six */
+/* Extra styling for row six */
 .spec-card {
   text-align: center;
 }
